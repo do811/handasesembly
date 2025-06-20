@@ -67,9 +67,14 @@ string findnn(map<string, string>rev, string input, vector<string> revList,bool 
 	{
 		return out = rev[input].replace(rev[input].find("nn", 0), 2, head);
 	}
-	return out = rev[input].replace(rev[input].find("n", 0),1, head);
-
+	return out = rev[input].replace(rev[input].find("n", 0), 1, head);
 }
+
+string convert(map<string, string>rev, string input, vector<string> revList)
+{
+	findnn(rev_asemble, input, hexaL, true)
+}
+
 int main() {
 	int switch_num;
 	ifstream in{ "アセンブラ命令対応表.txt" };
@@ -84,7 +89,7 @@ int main() {
 	for (int i = 1; FILE_MAX_ROW >= i; i++) {
 		getline(in, reading_line_buffer);
 		cout << reading_line_buffer;
-		if (i % 2)//奇数行の場合
+		if (i % 2)//奇数行の場合、16進数コード
 		{
 			Hexa hexaObj;
 			hexaObj.num = reading_line_buffer;
@@ -93,7 +98,7 @@ int main() {
 			hexaList.push_back(hexaObj);
 			cout << " → ";
 		}
-		else
+		else//偶数行の場合、アセンブラ命令
 		{
 			Asmstr asmObj;
 			asmObj.num = reading_line_buffer;
@@ -130,10 +135,10 @@ reagain:
 		if (asm_result == asmL.end() && switch_num == HAND_ASEMBLE ||
 			rev_result == hexaL.end() && switch_num == REV_ASEMBLE)
 		{
-			if (switch_num == REV_ASEMBLE)
+			if (switch_num == REV_ASEMBLE)//逆アセンブル時、
 			{
 
-				output.result_output.push_back(findnn(rev_asemble, input, hexaL,true));
+				output.result_output.push_back(convert(rev_asemble, input, hexaL));
 
 			}else if (!(input.empty())) {
 				cout << "none→";
